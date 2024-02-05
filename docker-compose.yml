@@ -1,0 +1,24 @@
+version: '7.0.4'
+
+services:
+#MongoDB
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+#Node.js
+  api:
+    build: .
+    ports:
+      - 3000:3000
+
+    environment:
+      DATABASE_URL: mongodb://db_container/mybrary
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}
