@@ -1,0 +1,20 @@
+npm run devStart
+
+docker run -p 3000:3000 webdev
+
+docker run -d -p 27017:27017 --name=mongo-example mongo
+docker exec -it mongo-example mongosh
+
+
+#build
+docker build . -t webdev
+docker run -p 3000:3000 webdev
+docker ps
+docker stop <container_id_or_name>
+docker rm <container_id_or_name>
+
+
+#build with docker-compose.yml
+docker-compose build
+docker-compose up
+docker container ls -f status=exited -a
